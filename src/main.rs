@@ -20,7 +20,7 @@ async fn main() -> anyhow::Result<()> {
         .init();
 
     let pool = SqlitePoolOptions::new()
-        .max_connections(8)
+        .max_connections(10)
         .connect(&var("Database.Path")?)
         .await?;
 
