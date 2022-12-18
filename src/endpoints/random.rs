@@ -14,12 +14,10 @@ pub async fn endpoint(
     Connection(mut conn): Connection,
     Query(params): Query<Params>,
 ) -> Result<Image, (StatusCode, String)> {
-    let (name, content): (String, Vec<u8>) =
-        sqlx::query_as("select name, content from asset where nsfw=? order by random() LIMIT 1")
-            .bind(params.nsfw)
-            .fetch_one(&mut conn)
-            .await
-            .map_err(internal_error)?;
-
-    Ok(Image(name, content))
+    sqlx::query_as("select name, content from asset where nsfw=? order by random() limit 1")
+        .bind(params.nsfw)
+        .fetch_one(&mut conn)
+        .await
+        .map_err(internal_error)
+        .map(|(name, content)| Image(name, content))
 }
