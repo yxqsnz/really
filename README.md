@@ -1,5 +1,5 @@
 # really
-A simple clone of @Waifu-pics written in Rust.
+A simple clone of [Waifu-pics](https://github.com/Waifu-pics) written in Rust.
 
 ## Why? 
 I've no idea.
@@ -10,7 +10,7 @@ I've no idea.
 This is my first [axum](https://github.com/tokio-rs/axum) project.
 
 ## why Sqlite?
-Lazyness.
+Laziness.
 
 ## How to create a database for this project?
 
