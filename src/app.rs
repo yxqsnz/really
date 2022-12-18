@@ -6,11 +6,12 @@ use axum::{
 use sqlx::{Pool, Sqlite};
 use tower_http::cors::CorsLayer;
 
-use crate::endpoints::{meta, random};
+use crate::endpoints::{by, meta, random};
 pub fn endpoints(pool: Pool<Sqlite>) -> Router {
     Router::new()
         .route("/api/v1/random", get(random::endpoint))
         .route("/api/v1/meta", get(meta::endpoint))
+        .route("/api/v1/by/:type/:category", get(by::endpoint))
         .layer(
             // see https://docs.rs/tower-http/latest/tower_http/cors/index.html
             // for more details
