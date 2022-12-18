@@ -1,7 +1,6 @@
-use crate::utils::{database::Connection, image::Image, status_code::internal_error};
-use axum::http::StatusCode;
-
-use axum::extract::Path;
+use crate::utils::status_code::not_found_or_500;
+use crate::utils::{database::Connection, image::Image};
+use axum::{extract::Path, http::StatusCode};
 
 pub async fn endpoint(
     Connection(mut conn): Connection,
@@ -20,6 +19,6 @@ pub async fn endpoint(
     .bind(category)
     .fetch_one(&mut conn)
     .await
-    .map_err(internal_error)
+    .map_err(not_found_or_500)
     .map(|(name, content)| Image(name, content))
 }

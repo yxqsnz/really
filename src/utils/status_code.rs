@@ -8,3 +8,13 @@ where
 {
     (StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
 }
+
+pub fn not_found_or_500(err: sqlx::Error) -> (StatusCode, String) {
+    match err {
+        sqlx::Error::RowNotFound => (
+            StatusCode::NOT_FOUND,
+            String::from("Can't find this image or category"),
+        ),
+        or => internal_error(or),
+    }
+}

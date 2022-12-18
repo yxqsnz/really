@@ -1,4 +1,4 @@
-use crate::utils::{database::Connection, image::Image, status_code::internal_error};
+use crate::utils::{database::Connection, image::Image, status_code::not_found_or_500};
 use {axum::extract::Query, axum::http::StatusCode};
 
 use serde::Deserialize;
@@ -16,6 +16,6 @@ pub async fn endpoint(
         .bind(params.nsfw)
         .fetch_one(&mut conn)
         .await
-        .map_err(internal_error)
+        .map_err(not_found_or_500)
         .map(|(name, content)| Image(name, content))
 }
