@@ -35,9 +35,9 @@ pub async fn endpoint(
                 .map_err(internal_error)?;
 
         response.categories.push(Category {
-            is_nsfw,
             items,
             name,
+            is_nsfw,
         });
     }
 
