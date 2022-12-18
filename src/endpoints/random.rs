@@ -1,7 +1,5 @@
-use crate::utils::image::Image;
-use crate::utils::{database::Connection, status_code::internal_error};
-use axum::extract::Query;
-use axum::http::StatusCode;
+use crate::utils::{database::Connection, image::Image, status_code::internal_error};
+use {axum::extract::Query, axum::http::StatusCode};
 
 use serde::Deserialize;
 
