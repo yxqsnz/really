@@ -1,0 +1,17 @@
+[package]
+name = "really"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.67"
+async-trait = "0.1.60"
+axum = "0.6.1"
+dotenv = "0.15.0"
+serde = { version = "1.0.151", features = ["derive"] }
+sqlx = { version = "0.6.2", features = ["runtime-tokio-rustls", "any", "sqlite"] }
+tokio = { version = "1.23.0", features = ["rt-multi-thread", "macros"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
