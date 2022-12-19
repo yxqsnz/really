@@ -7,7 +7,7 @@ use serde::Serialize;
 pub struct Category {
     pub items: u32,
     pub name: String,
-    pub is_nsfw: bool,
+    pub has_nsfw_content: bool,
 }
 
 #[derive(Serialize, Default)]
@@ -27,7 +27,7 @@ pub async fn endpoint(
     let mut response = Response::default();
 
     for (name,) in categories {
-        let (is_nsfw, items): (bool, u32) =
+        let (has_nsfw_content, items): (bool, u32) =
             sqlx::query_as("select nsfw, count(hash) from asset where category=?")
                 .bind(&name)
                 .fetch_one(&mut conn)
@@ -37,7 +37,7 @@ pub async fn endpoint(
         response.categories.push(Category {
             items,
             name,
-            is_nsfw,
+            has_nsfw_content,
         });
     }
 
