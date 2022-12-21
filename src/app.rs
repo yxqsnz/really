@@ -6,13 +6,15 @@ use axum::{
 use sqlx::{Pool, Sqlite};
 use tower_http::cors::{AllowHeaders, CorsLayer};
 
-use crate::endpoints::{asset, by, meta, random};
+use crate::endpoints::{v1, v2};
+
 pub fn endpoints(pool: Pool<Sqlite>) -> Router {
     Router::new()
-        .route("/api/v1/random", get(random::endpoint))
-        .route("/api/v1/meta", get(meta::endpoint))
-        .route("/api/v1/by/:type/:category", get(by::endpoint))
-        .route("/api/v1/asset/:name", get(asset::endpoint))
+        .route("/api/v1/random", get(v1::random::endpoint))
+        .route("/api/v1/meta", get(v1::meta::endpoint))
+        .route("/api/v1/by/:type/:category", get(v1::by::endpoint))
+        .route("/api/v1/asset/:name", get(v1::asset::endpoint))
+        .route("/api/v2/img/:category", get(v2::img::get))
         .layer(
             CorsLayer::new()
                 .allow_origin("*".parse::<HeaderValue>().unwrap())
